@@ -30,6 +30,10 @@ function create() {
 
     var self = this;
 
+    // 2D Camera
+    this.cameras.main.setBounds(0, 0, 800, 600);
+    this.cameras.main.setZoom(2);
+
     // Draw Scene
     this.add.image(400, 300, 'background');
     ladder = self.physics.add.sprite(380, 175, 'ladder');
@@ -41,6 +45,9 @@ function create() {
     player.setBounce(0.2);
     player.setCollideWorldBounds(true);
     player.body.setGravityY(600);
+
+    // Set camera to follow player
+    this.cameras.main.startFollow(player, true, 1, 1);
 
     // Add collider
     self.physics.add.collider(player, ground);
