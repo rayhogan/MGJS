@@ -25,6 +25,7 @@ var player;
 var ground;
 var ladder;
 var cursor;
+var pointer;
 
 function create() {
 
@@ -54,16 +55,18 @@ function create() {
 
     // Cursor keys
     cursors = this.input.keyboard.createCursorKeys();
+    // pointer
+    pointer = this.input.activePointer;
 }
 
 function update() {
 
     if (player) {
 
-        if (cursors.left.isDown) {
+        if (cursors.left.isDown || (pointer.isDown && pointer.x < player.x)) {
             player.setVelocityX(-160);
 
-        } else if (cursors.right.isDown) {
+        } else if (cursors.right.isDown || (pointer.isDown && pointer.x > player.x)) {
             player.setVelocityX(160);
 
         } else {
@@ -73,10 +76,10 @@ function update() {
         if (checkOverlap(player, ladder).width > 0) {
 
             player.setGravityY(0);
-            if (cursors.up.isDown) {
+            if (cursors.up.isDown || (pointer.isDown && (pointer.y+200) < player.y)) {
                 player.setVelocityY(-200);
             }
-            else if (cursors.down.isDown) {
+            else if (cursors.down.isDown || (pointer.isDown && (pointer.y+200) > (player.y + player.height))) {
                 player.setVelocityY(+200);
             }
             else {
