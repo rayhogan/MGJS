@@ -2,6 +2,7 @@ var config = {
     type: Phaser.AUTO,
     width: 800,
     height: 600,
+    parent: 'gameCanvas',
     physics: {
         default: 'arcade'
     },
@@ -32,13 +33,13 @@ function create() {
 
     // 2D Camera
     this.cameras.main.setBounds(0, 0, 800, 600);
-    this.cameras.main.setZoom(2);
+    //this.cameras.main.setZoom(2);
 
     // Draw Scene
     this.add.image(400, 300, 'background');
     ladder = self.physics.add.sprite(380, 175, 'ladder');
     ground = this.physics.add.staticGroup();
-    ground.create(400, 575, 'ground');
+    ground.create(400, 573, 'ground');
 
     // Draw Player
     player = self.physics.add.sprite(200, 200, 'player');
