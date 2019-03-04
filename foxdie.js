@@ -26,25 +26,31 @@ var player;
 var ground;
 var ladder;
 var cursor;
+var ladders;
 
 function create() {
 
     var self = this;
 
     // 2D Camera
-    this.cameras.main.setBounds(0, 0, 800, 600);
+    this.cameras.main.setBounds(0, 0, 800, 1000);
+    this.cameras.main.setViewport(0, 0, 800, 600);
     //this.cameras.main.setZoom(2);
 
     // Draw Scene
     this.add.image(400, 300, 'background');
-    ladder = self.physics.add.sprite(380, 175, 'ladder');
+    this.add.image(400, 700, 'background');
+    ladders = this.physics.add.staticGroup();
+    ladders.create(380, 175, 'ladder');
+    ladders.create(380, 600, 'ladder');
+    //ladder = self.physics.add.sprite(380, 175, 'ladder');
     ground = this.physics.add.staticGroup();
-    ground.create(400, 573, 'ground');
+    ground.create(400, 1000, 'ground');
 
     // Draw Player
     player = self.physics.add.sprite(200, 200, 'player');
     player.setBounce(0.2);
-    player.setCollideWorldBounds(true);
+    //player.setCollideWorldBounds(true);
     player.body.setGravityY(600);
 
     // Set camera to follow player
@@ -72,7 +78,7 @@ function update() {
             player.setVelocityX(0);
         }
 
-        if (checkOverlap(player, ladder).width > 0) {
+        if (checkOverlap(player, ladders).width > 0) {
 
             player.setGravityY(0);
             if (cursors.up.isDown || (this.input.activePointer.isDown && (this.input.activePointer.y+200) < player.y)) {
@@ -95,11 +101,23 @@ function update() {
 
 function checkOverlap(spriteA, spriteB) {
 
+    var overlapping = 0;
     try {
-        var boundsA = spriteA.getBounds();
-        var boundsB = spriteB.getBounds();
 
-        return Phaser.Geom.Rectangle.Intersection(boundsA, boundsB);
+        spriteB.forEach(element => {
+            var boundsA = spriteA.getBounds();
+            var boundsB = element.getBounds();
+
+            if(Phaser.Geom.Rectangle.Intersection(boundsA, boundsB) > 0)
+            {
+                overlapping = 1;
+            }             
+
+        });
+        
+        
+
+        return overlapping;
     }
     catch (e) {
         console.log(e);
