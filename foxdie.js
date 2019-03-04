@@ -78,7 +78,7 @@ function update() {
             player.setVelocityX(0);
         }
 
-        if (checkOverlap(player, ladders).width > 0) {
+        if (checkOverlap(player, ladders) > 0) {
 
             player.setGravityY(0);
             if (cursors.up.isDown || (this.input.activePointer.isDown && (this.input.activePointer.y+200) < player.y)) {
@@ -104,11 +104,11 @@ function checkOverlap(spriteA, spriteB) {
     var overlapping = 0;
     try {
 
-        spriteB.forEach(element => {
+        spriteB.children.entries.forEach(element => {
             var boundsA = spriteA.getBounds();
             var boundsB = element.getBounds();
 
-            if(Phaser.Geom.Rectangle.Intersection(boundsA, boundsB) > 0)
+            if(Phaser.Geom.Rectangle.Intersection(boundsA, boundsB).width > 0)
             {
                 overlapping = 1;
             }             
