@@ -68,10 +68,10 @@ function update() {
 
     if (player) {
 
-        if (cursors.left.isDown || (this.input.activePointer.isDown && this.input.activePointer.x < player.x)) {
+        if (cursors.left.isDown && player.x > 0 || (this.input.activePointer.isDown && this.input.activePointer.x < player.x) && player.x > 0) {
             player.setVelocityX(-160);
 
-        } else if (cursors.right.isDown || (this.input.activePointer.isDown && this.input.activePointer.x > player.x)) {
+        } else if (cursors.right.isDown && player.x < 800 || (this.input.activePointer.isDown && this.input.activePointer.x > player.x) && player.x < 800) {
             player.setVelocityX(160);
 
         } else {
