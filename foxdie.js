@@ -33,22 +33,25 @@ function create() {
     var self = this;
 
     // 2D Camera
-    this.cameras.main.setBounds(0, 0, 800, 1000);
+    this.cameras.main.setBounds(0, 0, 800, 1500);
     this.cameras.main.setViewport(0, 0, 800, 600);
     //this.cameras.main.setZoom(2);
 
     // Draw Scene
-    this.add.image(400, 300, 'background');
-    this.add.image(400, 700, 'background');
+    this.add.image(400, 800, 'background');
+    this.add.image(400, 600, 'background');
+    this.add.image(400, 1300, 'background');
     ladders = this.physics.add.staticGroup();
-    ladders.create(380, 175, 'ladder');
-    ladders.create(380, 600, 'ladder');
+    ladders.create(380, 675, 'ladder');
+    ladders.create(380, 1100, 'ladder');
     //ladder = self.physics.add.sprite(380, 175, 'ladder');
     ground = this.physics.add.staticGroup();
-    ground.create(400, 1000, 'ground');
+    ground.create(400, 1500, 'ground');
+    ground.create(-100, 300, 'ground');
+    ground.create(850, 300, 'ground');
 
     // Draw Player
-    player = self.physics.add.sprite(200, 200, 'player');
+    player = self.physics.add.sprite(200, 800, 'player');
     player.setBounce(0.2);
     //player.setCollideWorldBounds(true);
     player.body.setGravityY(600);
