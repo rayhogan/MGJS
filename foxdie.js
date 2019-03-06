@@ -35,7 +35,6 @@ function create() {
     // 2D Camera
     this.cameras.main.setBounds(0, 0, 800, 1500);
     this.cameras.main.setViewport(0, 0, 800, 600);
-    //this.cameras.main.setZoom(2);
 
     // Draw Scene
     this.add.image(400, 800, 'background');
@@ -44,7 +43,7 @@ function create() {
     ladders = this.physics.add.staticGroup();
     ladders.create(380, 675, 'ladder');
     ladders.create(380, 1100, 'ladder');
-    //ladder = self.physics.add.sprite(380, 175, 'ladder');
+
     ground = this.physics.add.staticGroup();
     ground.create(400, 1500, 'ground');
     ground.create(-100, 300, 'ground');
@@ -53,7 +52,6 @@ function create() {
     // Draw Player
     player = self.physics.add.sprite(200, 800, 'player');
     player.setBounce(0.2);
-    //player.setCollideWorldBounds(true);
     player.body.setGravityY(600);
 
     // Set camera to follow player
@@ -71,10 +69,10 @@ function update() {
 
     if (player) {
 
-        if (cursors.left.isDown && player.x > 0 || (this.input.activePointer.isDown && this.input.activePointer.x < player.x) && player.x > 0) {
+        if (cursors.left.isDown && player.x > 0) {
             player.setVelocityX(-160);
 
-        } else if (cursors.right.isDown && player.x < 800 || (this.input.activePointer.isDown && this.input.activePointer.x > player.x) && player.x < 800) {
+        } else if (cursors.right.isDown && player.x < 800) {
             player.setVelocityX(160);
 
         } else {
@@ -84,10 +82,10 @@ function update() {
         if (checkOverlap(player, ladders) > 0) {
 
             player.setGravityY(0);
-            if (cursors.up.isDown || (this.input.activePointer.isDown && (this.input.activePointer.y+200) < player.y)) {
+            if (cursors.up.isDown) {
                 player.setVelocityY(-200);
             }
-            else if (cursors.down.isDown || (this.input.activePointer.isDown && (this.input.activePointer.y+200) > (player.y + player.height))) {
+            else if (cursors.down.isDown) {
                 player.setVelocityY(+200);
             }
             else {
@@ -116,8 +114,7 @@ function checkOverlap(spriteA, spriteB) {
                 overlapping = 1;
             }             
 
-        });
-        
+        }); 
         
 
         return overlapping;
