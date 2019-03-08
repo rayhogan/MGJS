@@ -105,18 +105,16 @@ function checkOverlap(spriteA, spriteB) {
     var overlapping = 0;
     try {
 
-        spriteB.children.entries.forEach(element => {
+        for (var i = 0; i < spriteB.children.entries.length; i++) {
             var boundsA = spriteA.getBounds();
-            var boundsB = element.getBounds();
+            var boundsB = spriteB.children.entries[i].getBounds();
 
-            if(Phaser.Geom.Rectangle.Intersection(boundsA, boundsB).width > 0)
-            {
+            if (Phaser.Geom.Rectangle.Intersection(boundsA, boundsB).width > 0) {
                 overlapping = 1;
-            }             
-
-        }); 
+                break;
+            }
+        }
         
-
         return overlapping;
     }
     catch (e) {
