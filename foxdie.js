@@ -63,6 +63,8 @@ function create() {
     // Cursor keys
     cursors = this.input.keyboard.createCursorKeys();
 
+    this.cameras.main.fadeIn(1000);
+
 }
 
 function update() {
@@ -114,7 +116,7 @@ function checkOverlap(spriteA, spriteB) {
                 break;
             }
         }
-        
+
         return overlapping;
     }
     catch (e) {
