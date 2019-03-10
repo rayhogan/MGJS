@@ -95,7 +95,11 @@ function update() {
             }
         }
         else {
-            player.body.setGravityY(600);
+            // If we are not touching the groun then apply gravity
+            if (checkOverlap(player, ground) == 0) {
+                player.body.setGravityY(600);
+                console.log("Falling");
+            }
         }
 
     }
