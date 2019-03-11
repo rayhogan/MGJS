@@ -54,6 +54,10 @@ function create() {
     player.setBounce(0.2);
     player.body.setGravityY(600);
 
+    player.falling = false;
+    player.fallHeight = 0;
+    player.isAlive = true;
+
     // Set camera to follow player
     this.cameras.main.startFollow(player, true, 1, 1);
 
@@ -82,8 +86,14 @@ function update() {
         }
 
         if (checkOverlap(player, ladders) > 0) {
-
+            // Can't be falling if overlapping
+            player.falling = false;
+            player.fallHeight = 0;
+            // Disable gravity
             player.setGravityY(0);
+
+
+            // Check ladder movement
             if (cursors.up.isDown) {
                 player.setVelocityY(-200);
             }
@@ -97,8 +107,21 @@ function update() {
         else {
             // If we are not touching the ground then apply gravity
             if (checkOverlap(player, ground) == 0) {
+                player.falling = true;
+                if (player.fallHeight == 0) {
+                    player.fallHeight = player.y;
+                }
                 player.body.setGravityY(600);
-                console.log("Falling");
+            }
+            else {
+                if (player.falling) {
+                    player.falling = false;
+                    if ((player.y - player.fallHeight) > 500) {
+                        player.isAlive = false;
+                        console.log("SNAKE IS DEAD");
+                    }
+                    player.fallHeight = 0;
+                }
             }
         }
 
