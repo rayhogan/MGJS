@@ -50,7 +50,7 @@ function create() {
     ground.create(850, 300, 'ground');
 
     // Draw Player
-    player = self.physics.add.sprite(200, 800, 'player');
+    player = self.physics.add.sprite(200, 1200, 'player');
     player.setBounce(0.2);
     player.body.setGravityY(600);
 
@@ -69,11 +69,12 @@ function create() {
 
     this.cameras.main.fadeIn(1000);
 
+
 }
 
 function update() {
 
-    if (player) {
+    if (player.isAlive) {
 
         if (cursors.left.isDown && player.x > 0) {
             player.setVelocityX(-160);
@@ -119,6 +120,18 @@ function update() {
                     if ((player.y - player.fallHeight) > 500) {
                         player.isAlive = false;
                         console.log("SNAKE IS DEAD");
+
+                        // We create the graphics object
+                        var bg = this.add.graphics({ x: 0, y: 900 });
+                        bg.fillStyle(0xb35900, 0.9);
+                        bg.fillRect(0, 0, 800, 600);
+
+                        // Text
+                        var gameOverText = this.add.text(250, 1200, 'S N A K E  I S  D E A D', {
+                            fontSize: '20px',
+                            fill: '#000',
+                            fill: "#ffffff",
+                        });
                     }
                     player.fallHeight = 0;
                 }
