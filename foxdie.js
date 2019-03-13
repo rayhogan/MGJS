@@ -22,6 +22,7 @@ function preload() {
     this.load.image('player', 'img/player.png');
 }
 
+// Global variables
 var player;
 var ground;
 var ladder;
@@ -74,6 +75,7 @@ function create() {
 
 function update() {
 
+    // Check if player is alive
     if (player.isAlive) {
 
         if (cursors.left.isDown && player.x > 0) {
