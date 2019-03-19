@@ -16,6 +16,7 @@ var config = {
 var game = new Phaser.Game(config);
 
 function preload() {
+    // Load the necessary game assets
     this.load.image('background', 'img/background.png');
     this.load.image('ground', 'img/ground.png');
     this.load.image('ladder', 'img/ladder.png');
@@ -144,6 +145,8 @@ function update() {
 
 }
 
+// Check an overlap between a sprite object & a physics group
+// Temporary hack -- will need re-implementing
 function checkOverlap(spriteA, spriteB) {
 
     var overlapping = 0;
