@@ -122,6 +122,8 @@ function update() {
                     player.falling = false;
                     if ((player.y - player.fallHeight) > 500) {
                         player.isAlive = false;
+                        
+                        player.setVelocityX(0);
                         console.log("SNAKE IS DEAD");
 
                         // We create the graphics object
@@ -135,6 +137,10 @@ function update() {
                             fill: '#000',
                             fill: "#ffffff",
                         });
+
+                        var retryButton = this.add.text(350, 1400, 'Retry?', { fill: '#0f0' })
+                            .setInteractive()
+                            .on('pointerdown', () => { bg.destroy(); gameOverText.destroy(); retryButton.destroy(); player.isAlive = true });
                     }
                     player.fallHeight = 0;
                 }
@@ -143,6 +149,11 @@ function update() {
 
     }
 
+}
+
+function HelloWorld(bg) {
+    console.log("hi");
+    bg.destroy();
 }
 
 // Check an overlap between a sprite object & a physics group
